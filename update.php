@@ -4,6 +4,7 @@
  *$info->vpl_id
  *$info->change_score
  *$info->class_name
+ *$info->contest_name
  **/
 if(isset($_POST['change'])){
     $info = json_decode($_POST['change']);
