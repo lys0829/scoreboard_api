@@ -59,6 +59,20 @@ if(isset($_POST['change'])){
     }
     $contest->ranklist = $urankl;
     file_create($dir.'/contest.json',json_encode($contest));
+    
+    $sublist = [];
+    $sublist = json_decode(file_read($dir.'/submission_list.json'));
+    $sid = 0;
+    if(count($sublist)>0)$sid = sublist[count($sublist)-1]->id;
+    //$info = json_decode($_POST['change']);
+    $sublist_add = new stdclass();
+    $sublist_add->id = $sid;
+    $sublist_add->time_update = time();
+    $sublist_add->uid = $info->uid;
+    $sublist_add->pid = $info->pid;
+    $sublist_add->score = $info->change_score;
+    $sublist[count($sublist)] = $sublist_add;
+    file_create($dir.'/submission_list.json',json_encode($sublist));
     //file_create($classn.'/userlist.json',json_encode($user_list_save));
     exit('SUCC');
 }
